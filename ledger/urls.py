@@ -15,9 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import path
+from .views import recipes_list, recipe1, recipe2
 
 urlpatterns = [
-path('admin/', admin.site.urls),
-path('ledger/', include('ledger.urls', namespace="ledger")),
+    path('recipes/list', recipes_list, name='Recipes List'),
+    path('recipe/1', recipe1, name='Recipe 1'),
+    path('recipe/2', recipe2, name='Recipe 2'),
 ]
+
+app_name = "ledger"
