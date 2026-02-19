@@ -1,138 +1,37 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import TemplateView
+from .models import RecipeIngredient
 
 # Create your views here.
 
 def recipes_list(request):
+    recipe1 = RecipeIngredient.objects.filter(recipe__recipeName__exact='Recipe 1')
+    recipe2 = RecipeIngredient.objects.filter(recipe__recipeName__exact='Recipe 2')
+    recipe1ingredients = RecipeIngredient.objects.filter(recipe__recipeName='Recipe 1')
+    recipe2ingredients = RecipeIngredient.objects.filter(recipe__recipeName='Recipe 2')
     ctx =  {
-    "recipes" : [
-        {
-            "name": "Recipe 1",
-            "ingredients": [
-                {
-                    "name": "tomato",
-                    "quantity": "3pcs"
-                },
-                {
-                    "name": "onion",
-                    "quantity": "1pc"
-                },
-                {
-                    "name": "pork",
-                    "quantity": "1kg"
-                },
-                {
-                    "name": "water",
-                    "quantity": "1L"
-                },
-                {
-                    "name": "sinigang mix",
-                    "quantity": "1 packet"
-                }
-            ],
-            "link": "/recipe/1"
-        },
-        {
-            "name": "Recipe 2",
-            "ingredients": [
-                {
-                    "name": "garlic",
-                    "quantity": "1 head"
-                },
-                {
-                    "name": "onion",
-                    "quantity": "1pc"
-                },
-                {
-                    "name": "vinegar",
-                    "quantity": "1/2cup"
-                },
-                {
-                    "name": "water",
-                    "quanity": "1 cup"
-                },
-                {
-                    "name": "salt",
-                    "quantity": "1 tablespoon"
-                },
-                {
-                    "name": "whole black peppers",
-                    "quantity": "1 tablespoon"
-                },
-                {
-                    "name": "pork",
-                    "quantity": "1 kilo"
-                }
-            ],
-            "link": "/recipe/2"
-        }
-    ]
+    'recipe1': recipe1,
+    'recipe2': recipe2,
+    'recipe2ingredients': recipe1ingredients,
+    'recipe2ingredients': recipe2ingredients,
     }
     return render(request, "recipes/recipes_list.html", ctx)
 
 def recipe1(request):
+    recipe = RecipeIngredient.objects.filter(recipe__name='Recipe 1')
+    ingredients = RecipeIngredient.objects.filter(recipe__recipeName='Recipe 1')
     ctx = {
-    "name": "Recipe 1",
-    "ingredients": [
-        {
-            "name": "tomato",
-            "quantity": "3pcs"
-        },
-        {
-            "name": "onion",
-            "quantity": "1pc"
-        },
-        {
-            "name": "pork",
-            "quantity": "1kg"
-        },
-        {
-            "name": "water",
-            "quantity": "1L"
-        },
-        {
-            "name": "sinigang mix",
-            "quantity": "1 packet"
-        }
-    ],
-    "link": "/recipe/1"
-}
-    return render(request, 'recipes/recipe1.html', ctx)
+        'recipe': recipe,
+        'ingredients': ingredients
+    }
+    return render(request, 'recipes/recipe.html', ctx)
 
-def recipe2(request):   
+def recipe2(request):
+    recipe = RecipeIngredient.objects.filter(recipe__name='Recipe 2')
+    ingredients = RecipeIngredient.objects.filter(recipe__recipeName='Recipe 2')
     ctx = {
-    "name": "Recipe 2",
-    "ingredients": [
-        {
-            "name": "garlic",
-            "quantity": "1 head"
-        },
-        {
-            "name": "onion",
-            "quantity": "1pc"
-        },
-        {
-            "name": "vinegar",
-            "quantity": "1/2cup"
-        },
-        {
-            "name": "water",
-            "quantity": "1 cup"
-        },
-        {
-            "name": "salt",
-            "quantity": "1 tablespoon"
-        },
-        {
-            "name": "whole black peppers",
-            "quantity": "1 tablespoon"
-        },
-        {
-            "name": "pork",
-            "quantity": "1 kilo"
-        }
-    ],
-    "link": "/recipe/2"
-}
-    return render(request, 'recipes/recipe2.html', ctx)
+        'recipe': recipe,
+        'ingredients': ingredients
+    }
+    return render(request, 'recipes/recipe.html', ctx)
