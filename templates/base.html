@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+{% if user.is_authenticated %}
+<form method="POST" action="{% url 'logout' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Logout</button>
+</form>
+{% else %}
+    <a href="/accounts/login" class="button">Login</a>
+{% endif %}
+
     <link rel="stylesheet" href="style.css">
     <title>{% block title %}Recipe Book{% endblock %}</title>
 {% block styles %}{% endblock %}

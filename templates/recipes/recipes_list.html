@@ -1,17 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block content %}
-<ul> 
-{% for recipe in recipes %} 
-    <li>{{ recipe.name }}</li>
-    <ul>
-    {% for ingredient in recipe.ingredients %}
-        <li>{{ ingredient.name }} : {{ ingredient.quantity }}</li>
-    {% endfor %}
-    </ul>
-    {{ recipe.link }}
-{% endfor %} 
-</ul>
+
+<li><a href="{% url 'ledger:Recipe 1'%}">{{ recipe1 }}</a></li>
+<li> <a href="{% url 'ledger:Recipe 2'%}">{{ recipe2 }}</a> </li>
+
 {% endblock %}
+
+
 
