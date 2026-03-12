@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% for recipe in recipes %}
+    <li>
+        <a href="{% url 'ledger:recipe-detail' recipe.pk %}">
+            {{ recipe.recipeName }}
+        </a>
+    </li>
+    {% endfor %}
+</ul> 
+<li> <a href="{% url 'ledger:recipe-add' %}">New Recipe</a> </li>
+
+{% endblock %}
+
+
+
